@@ -1,13 +1,20 @@
 /*
- * c4_hal_graphics.c
+ * c4_hal_graphics_opengl.c
  *
  *  Created on: Jan 13, 2019
  *      Author: mabdelmawla
  */
+#include <GL/glut.h>
+
 #include <c4_hal_graphics.h>
 
-_t_c4_err c4_hal_graphics_init(void){
+_t_c4_err c4_hal_graphics_init(int argc, char**argv){
 	_t_c4_err ret = C4_ERR_OK;
+    glutInit(&argc, argv);
+    glutInitWindowPosition(100,100);
+    glutInitWindowSize(500,500);
+    glutCreateWindow("Hello World");
+    glutMainLoop();
 	return ret;
 }
 

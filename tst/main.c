@@ -1,9 +1,6 @@
-#include <GL/glut.h>
+#include <c4_hal_graphics.h>
 
-void main(int argc, char**argv) {
-    glutInit(&argc, argv);
-    glutInitWindowPosition(100,100);
-    glutInitWindowSize(500,500);
-    glutCreateWindow("Hello World");
-    glutMainLoop();
+int main(int argc, char**argv) {
+	c4_hal_graphics_init(argc, argv);
+	return 0;
 }
