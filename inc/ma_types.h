@@ -21,6 +21,7 @@ along with ma_clib.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef _MA_TYPES_H_
 #define _MA_TYPES_H_
 
+typedef char				_t_ma_char;
 typedef unsigned char		_t_ma_u8;
 typedef unsigned short		_t_ma_u16;
 #ifndef __linux__
@@ -39,5 +40,8 @@ typedef signed long			_t_ma_s32;
 typedef unsigned char 		_t_ma_bool;
 
 #define MA_NULL		((void*)0)
+
+#define TRUE 					1
+#define FALSE 					0
 
 #endif //_MA_TYPES_H_
