@@ -11,11 +11,14 @@ CFLAGS=-Iinc -I. -g
 SRC_ROOT=src
 TST_ROOT=tst
 
+#libs
+LIBS=glut
+
 #Components
 SRC=$(wildcard $(TST_ROOT)/*.c) $(wildcard $(SRC_ROOT)/ma_aes/*.c)
 
 all: $(SRC)
-	$(CC) $(SRC) $(CFLAGS) -o $(APP)
+	$(CC) $(SRC) $(CFLAGS) -l$(LIBS) -o $(APP)
 
 clean: 
 	rm $(APP) *.o
