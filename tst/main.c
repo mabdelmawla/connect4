@@ -1,11 +1,9 @@
 #include <stdlib.h>
-#include <c4_hal_graphics.h>
+#include <c4_game_play.h>
 
-void keyCB(_t_ma_char key, _t_str_c4_hal_graphics_point pt){
-	if('q' == key) exit(0);
-}
 
 int main(int argc, char**argv) {
-	c4_hal_graphics_init(&argc, &argv, keyCB);
+	c4_game_play_init(&argc, &argv);
+	exit(0);
 	return 0;
 }
