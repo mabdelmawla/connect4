@@ -11,11 +11,13 @@
 
 static _t_c4_hal_graphics_key_callback gpf_key_cb;
 
+int xx, yy, cc;
+
 static void displayCB(void) {
 	glClear(GL_COLOR_BUFFER_BIT); /* clear the display */
-	glColor3f(1.0, 1.0, 1.0); /* set current color to white */
+	glColor3f(1.0, 1.0, cc); /* set current color to white */
 	glBegin(GL_POLYGON); /* draw filled triangle */
-	glVertex2i(200, 125); /* specify each vertex of triangle */
+	glVertex2i(xx, yy); /* specify each vertex of triangle */
 	glVertex2i(100, 375);
 	glVertex2i(300, 375);
 	glEnd(); /* OpenGL draws the filled triangle */
@@ -25,12 +27,19 @@ static void displayCB(void) {
 static void keyCB(unsigned char key, int x, int y) /* called on key press */
 {
 	_t_str_c4_hal_graphics_point pt = {x, y};
+	xx += 20;
+	yy += 20;
+	cc++;
+	glutPostRedisplay();
 	gpf_key_cb((_t_ma_char)key, pt);
 }
 
 _t_c4_err c4_hal_graphics_init(int *argc, char***argv, _t_c4_hal_graphics_key_callback cb) {
 	_t_c4_err ret = C4_ERR_OK;
 	int win;
+	xx = 200;
+	yy = 125;
+	cc = 1;
 
 	gpf_key_cb = cb;
 	glutInit(argc, *argv); /* initialize GLUT system */
