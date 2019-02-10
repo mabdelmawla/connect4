@@ -78,12 +78,22 @@ typedef struct _str_c4_hal_graphics_color{
 	_t_ma_u8	alfa;
 } _t_str_c4_hal_graphics_color;
 
+typedef struct _str_c4_hal_graphics_window{
+	_t_str_c4_hal_graphics_color	bg_color;
+	_t_str_c4_hal_graphics_point	pt_window_start;
+	_t_ma_u16						height;
+	_t_ma_u16						width;
+	_t_ma_int						win_handle;
+	_t_ma_char*						win_name;
+} _t_str_c4_hal_graphics_window;
+
 
 
 typedef void (*_t_c4_hal_graphics_key_callback)(_t_ma_char, _t_str_c4_hal_graphics_point); /* called on key press */
 typedef void (*_t_c4_hal_graphics_special_key_callback)(_t_ma_int, _t_str_c4_hal_graphics_point); /* called on special key press */
 
 _t_c4_err c4_hal_graphics_init(
+		_t_str_c4_hal_graphics_window*,
 		_t_c4_hal_graphics_key_callback,
 		_t_c4_hal_graphics_special_key_callback);
 _t_c4_err c4_hal_graphics_deinit(void);

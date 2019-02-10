@@ -44,26 +44,32 @@ static void SpecialKeyCb(int key, int x, int y){
 	gpf_sp_key_cb((_t_ma_int)key, pt);
 }
 
-_t_c4_err c4_hal_graphics_init(_t_c4_hal_graphics_key_callback cb, _t_c4_hal_graphics_special_key_callback sp_cb) {
+_t_c4_err c4_hal_graphics_init(
+		_t_str_c4_hal_graphics_window* pwin,
+		_t_c4_hal_graphics_key_callback cb,
+		_t_c4_hal_graphics_special_key_callback sp_cb) {
 	_t_c4_err ret = C4_ERR_OK;
-	int win;
+	int dummy = 1;
 	xx = 200;
 	yy = 125;
 	cc = 1;
 
 	gpf_key_cb = cb;
 	gpf_sp_key_cb = sp_cb;
-	int dummy = 1;
 	glutInit(&dummy, NULL); /* initialize GLUT system */
 
 	glutInitDisplayMode(GLUT_RGB);
-	glutInitWindowSize(400, 500); /* width=400pixels height=500pixels */
-	win = glutCreateWindow("Triangle"); /* create window */
+	glutInitWindowSize(pwin->width, pwin->height); /* width=400pixels height=500pixels */
+	pwin->win_handle = glutCreateWindow(pwin->win_name); /* create window */
 
 	/* from this point on the current window is win */
 
-	glClearColor(0.0, 0.0, 0.0, 0.0); /* set background to black */
-	gluOrtho2D(0, 400, 0, 500); /* how object is mapped to window */
+	glClearColor(
+			pwin->bg_color.r,
+			pwin->bg_color.g,
+			pwin->bg_color.b,
+			pwin->bg_color.alfa); /* set background to black */
+	gluOrtho2D(0, pwin->width, 0, pwin->height); /* how object is mapped to window */
 	glutDisplayFunc(displayCB); /* set window's display callback */
 	glutKeyboardFunc(keyCB); /* set window's key callback */
 	glutSpecialFunc(SpecialKeyCb);
