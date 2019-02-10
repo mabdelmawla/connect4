@@ -14,8 +14,11 @@
 static void keyCB(_t_ma_char key, _t_str_c4_hal_graphics_point pt){
 }
 
+static void SpkeyCB(_t_ma_int key, _t_str_c4_hal_graphics_point pt){
+}
+
 int c4_game_play_init(int *argc, char***argv){
 	int ret = -1;
-	c4_game_draw_init(argc, argv, keyCB);
+	c4_game_draw_init(argc, argv, keyCB, SpkeyCB);
 	return ret;
 }

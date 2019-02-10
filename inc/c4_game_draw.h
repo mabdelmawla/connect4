@@ -10,6 +10,6 @@
 
 #include <c4_hal_graphics.h>
 
-int c4_game_draw_init(int *argc, char***argv, _t_c4_hal_graphics_key_callback);
+int c4_game_draw_init(int *argc, char***argv, _t_c4_hal_graphics_key_callback, _t_c4_hal_graphics_special_key_callback);
 
 #endif /* INC_C4_GAME_DRAW_H_ */

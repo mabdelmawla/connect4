@@ -10,6 +10,7 @@
 #include <c4_hal_graphics.h>
 
 static _t_c4_hal_graphics_key_callback gpf_key_cb;
+static _t_c4_hal_graphics_special_key_callback gpf_sp_key_cb;
 
 int xx, yy, cc;
 
@@ -34,7 +35,16 @@ static void keyCB(unsigned char key, int x, int y) /* called on key press */
 	gpf_key_cb((_t_ma_char)key, pt);
 }
 
-_t_c4_err c4_hal_graphics_init(int *argc, char***argv, _t_c4_hal_graphics_key_callback cb) {
+static void SpecialKeyCb(int key, int x, int y){
+	_t_str_c4_hal_graphics_point pt = {x, y};
+	xx += 20;
+	yy += 20;
+	cc++;
+	glutPostRedisplay();
+	gpf_sp_key_cb((_t_ma_int)key, pt);
+}
+
+_t_c4_err c4_hal_graphics_init(int *argc, char***argv, _t_c4_hal_graphics_key_callback cb, _t_c4_hal_graphics_special_key_callback sp_cb) {
 	_t_c4_err ret = C4_ERR_OK;
 	int win;
 	xx = 200;
@@ -42,6 +52,7 @@ _t_c4_err c4_hal_graphics_init(int *argc, char***argv, _t_c4_hal_graphics_key_ca
 	cc = 1;
 
 	gpf_key_cb = cb;
+	gpf_sp_key_cb = sp_cb;
 	glutInit(argc, *argv); /* initialize GLUT system */
 
 	glutInitDisplayMode(GLUT_RGB);
@@ -54,6 +65,7 @@ _t_c4_err c4_hal_graphics_init(int *argc, char***argv, _t_c4_hal_graphics_key_ca
 	gluOrtho2D(0, 400, 0, 500); /* how object is mapped to window */
 	glutDisplayFunc(displayCB); /* set window's display callback */
 	glutKeyboardFunc(keyCB); /* set window's key callback */
+	glutSpecialFunc(SpecialKeyCb);
 
 	glutMainLoop(); /* start processing events... */
 
