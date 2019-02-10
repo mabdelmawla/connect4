@@ -44,7 +44,7 @@ static void SpecialKeyCb(int key, int x, int y){
 	gpf_sp_key_cb((_t_ma_int)key, pt);
 }
 
-_t_c4_err c4_hal_graphics_init(int *argc, char***argv, _t_c4_hal_graphics_key_callback cb, _t_c4_hal_graphics_special_key_callback sp_cb) {
+_t_c4_err c4_hal_graphics_init(_t_c4_hal_graphics_key_callback cb, _t_c4_hal_graphics_special_key_callback sp_cb) {
 	_t_c4_err ret = C4_ERR_OK;
 	int win;
 	xx = 200;
@@ -53,7 +53,8 @@ _t_c4_err c4_hal_graphics_init(int *argc, char***argv, _t_c4_hal_graphics_key_ca
 
 	gpf_key_cb = cb;
 	gpf_sp_key_cb = sp_cb;
-	glutInit(argc, *argv); /* initialize GLUT system */
+	int dummy = 1;
+	glutInit(&dummy, NULL); /* initialize GLUT system */
 
 	glutInitDisplayMode(GLUT_RGB);
 	glutInitWindowSize(400, 500); /* width=400pixels height=500pixels */

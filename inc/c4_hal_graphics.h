@@ -83,7 +83,9 @@ typedef struct _str_c4_hal_graphics_color{
 typedef void (*_t_c4_hal_graphics_key_callback)(_t_ma_char, _t_str_c4_hal_graphics_point); /* called on key press */
 typedef void (*_t_c4_hal_graphics_special_key_callback)(_t_ma_int, _t_str_c4_hal_graphics_point); /* called on special key press */
 
-_t_c4_err c4_hal_graphics_init(int *argc, char***argv, _t_c4_hal_graphics_key_callback, _t_c4_hal_graphics_special_key_callback);
+_t_c4_err c4_hal_graphics_init(
+		_t_c4_hal_graphics_key_callback,
+		_t_c4_hal_graphics_special_key_callback);
 _t_c4_err c4_hal_graphics_deinit(void);
 _t_c4_err c4_hal_graphics_line(
 		_t_str_c4_hal_graphics_point ptStart,

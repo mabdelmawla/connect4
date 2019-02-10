@@ -3,7 +3,6 @@
 
 
 int main(int argc, char**argv) {
-	c4_game_play_init(&argc, &argv);
-	exit(0);
+	c4_game_play_init();
 	return 0;
 }
