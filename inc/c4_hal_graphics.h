@@ -66,17 +66,51 @@
 	#define C4_HAL_GRAPHICS_SF_KEY_INSERT		(C4_HAL_GRAPHICS_SF_KEY_OTHER_BASE + 5)
 #endif
 
-typedef struct _str_c4_hal_graphics_point{
-	_t_ma_u16	x;
-	_t_ma_u16	y;
-} _t_str_c4_hal_graphics_point;
-
 typedef struct _str_c4_hal_graphics_color{
 	_t_ma_u8	r;
 	_t_ma_u8	g;
 	_t_ma_u8	b;
 	_t_ma_u8	alfa;
 } _t_str_c4_hal_graphics_color;
+
+typedef struct _str_c4_hal_graphics_point{
+	_t_ma_u16	x;
+	_t_ma_u16	y;
+} _t_str_c4_hal_graphics_point;
+
+typedef struct _str_c4_hal_graphics_line {
+	_t_str_c4_hal_graphics_point start;
+	_t_str_c4_hal_graphics_point end;
+} _t_str_c4_hal_graphics_line;
+
+typedef struct _str_c4_hal_graphics_rectanble {
+	_t_str_c4_hal_graphics_point top_left;
+	_t_str_c4_hal_graphics_point bottom_right;
+} _t_str_c4_hal_graphics_rectanble;
+
+typedef struct _str_c4_hal_graphics_circle {
+	_t_str_c4_hal_graphics_point center;
+	_t_ma_u16 radius;
+} _t_str_c4_hal_graphics_circle;
+
+typedef enum _enu_obj{
+	C4_HAL_GRAPHICS_NONE = 0xC500,
+	C4_HAL_GRAPHICS_PT,
+	C4_HAL_GRAPHICS_LINE,
+	C4_HAL_GRAPHICS_RECTANGLE,
+	C4_HAL_GRAPHICS_CIRCLE
+} _t_enu_obj;
+
+typedef struct _str_c4_hal_object {
+	_t_enu_obj type;
+	union {
+		_t_str_c4_hal_graphics_point 		pt;
+		_t_str_c4_hal_graphics_line			line;
+		_t_str_c4_hal_graphics_rectanble 	rectangle;
+		_t_str_c4_hal_graphics_circle 		circle;
+	} uni_obj;
+	_t_str_c4_hal_graphics_color color;
+} _t_str_c4_hal_object;
 
 typedef struct _str_c4_hal_graphics_window{
 	_t_str_c4_hal_graphics_color	bg_color;
@@ -88,7 +122,6 @@ typedef struct _str_c4_hal_graphics_window{
 } _t_str_c4_hal_graphics_window;
 
 
-
 typedef void (*_t_c4_hal_graphics_key_callback)(_t_ma_char, _t_str_c4_hal_graphics_point); /* called on key press */
 typedef void (*_t_c4_hal_graphics_special_key_callback)(_t_ma_int, _t_str_c4_hal_graphics_point); /* called on special key press */
 
@@ -97,21 +130,9 @@ _t_c4_err c4_hal_graphics_init(
 		_t_c4_hal_graphics_key_callback,
 		_t_c4_hal_graphics_special_key_callback);
 _t_c4_err c4_hal_graphics_deinit(void);
-_t_c4_err c4_hal_graphics_line(
-		_t_str_c4_hal_graphics_point ptStart,
-		_t_str_c4_hal_graphics_point ptEnd,
-		_t_str_c4_hal_graphics_color color
-		);
-_t_c4_err c4_hal_graphics_circle(
-		_t_str_c4_hal_graphics_point ptCenter,
-		_t_ma_u16 radius,
-		_t_str_c4_hal_graphics_color Color,
-		_t_ma_bool isFilled
-		);
-_t_c4_err c4_hal_graphics_rectangle(
-		_t_str_c4_hal_graphics_point ptStart,
-		_t_str_c4_hal_graphics_point ptEnd,
-		_t_str_c4_hal_graphics_color color,
-		_t_ma_bool isFilled
+
+_t_c4_err c4_hal_graphics_draw_objects(
+		_t_ma_u32	num_objects,
+		_t_str_c4_hal_object *objects_array
 		);
 #endif /* INC_C4_HAL_GRAPHICS_H_ */

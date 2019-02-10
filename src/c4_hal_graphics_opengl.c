@@ -85,22 +85,11 @@ _t_c4_err c4_hal_graphics_deinit(void) {
 	return ret;
 }
 
-_t_c4_err c4_hal_graphics_line(_t_str_c4_hal_graphics_point ptStart,
-		_t_str_c4_hal_graphics_point ptEnd, _t_str_c4_hal_graphics_color color) {
-	_t_c4_err ret = C4_ERR_OK;
-	return ret;
-}
-
-_t_c4_err c4_hal_graphics_circle(_t_str_c4_hal_graphics_point ptCenter,
-		_t_ma_u16 radius, _t_str_c4_hal_graphics_color Color,
-		_t_ma_bool isFilled) {
-	_t_c4_err ret = C4_ERR_OK;
-	return ret;
-}
-
-_t_c4_err c4_hal_graphics_rectangle(_t_str_c4_hal_graphics_point ptStart,
-		_t_str_c4_hal_graphics_point ptEnd, _t_str_c4_hal_graphics_color color,
-		_t_ma_bool isFilled) {
+_t_c4_err c4_hal_graphics_ploygon(
+		_t_ma_u32	num_pts,
+		_t_str_c4_hal_graphics_point *pts_array,
+		_t_str_c4_hal_graphics_color Color
+		){
 	_t_c4_err ret = C4_ERR_OK;
 	return ret;
 }
