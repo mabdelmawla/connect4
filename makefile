@@ -5,6 +5,7 @@ APP=connect4
 CC=gcc
 
 #CFLAGS
+#CFLAGS=-Iinc -I. -g -lglut -lGLU -lGL -lXmu -lXi -lXext -lX11 -lm
 CFLAGS=-Iinc -I. -g -lglut -lGL -lGLU
 
 #Source root
