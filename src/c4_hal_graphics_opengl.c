@@ -6,6 +6,7 @@
  */
 #include <GL/glut.h>
 #include <GL/gl.h>
+#include <math.h>
 
 #include <c4_hal_graphics.h>
 
@@ -40,13 +41,29 @@ static void draw_line(_t_str_c4_hal_graphics_line l, _t_str_c4_hal_graphics_colo
 static void draw_rectangle(_t_str_c4_hal_graphics_rectanble r, _t_str_c4_hal_graphics_color c){
     glColor3f(c.r,c.g,c.b);
 
-	glBegin(GL_POLYGON); /* draw filled triangle */
+	glBegin(GL_POLYGON); /* draw filled rectangle */
 		glVertex2i(r.bottom_left.x, r.bottom_left.y);
 		glVertex2i(r.top_right.x, r.bottom_left.y);
 		glVertex2i(r.top_right.x, r.top_right.y);
 		glVertex2i(r.bottom_left.x, r.top_right.y);
 	glEnd();
 }
+
+static void draw_circle(_t_str_c4_hal_graphics_circle circle, _t_str_c4_hal_graphics_color c){
+    int i;
+    const float pi = 3.14159265358979323846;
+	glColor3f(c.r,c.g,c.b);
+
+	glBegin(GL_POLYGON); /* draw filled circle */
+		for(i = 0; i < circle.finess; i++){
+			float x, y;
+			x = circle.center.x + circle.radius * cosf((i * 2 * pi) / circle.finess);
+			y = circle.center.y + circle.radius * sinf((i * 2 * pi) / circle.finess);
+			glVertex2i(x, y);
+		}
+	glEnd();
+}
+
 
 static void displayCB(void) {
 	glClear(GL_COLOR_BUFFER_BIT); /* clear the display */
@@ -79,6 +96,12 @@ static void displayCB(void) {
 	c.g = 0;
 	c.b = 255;
 	draw_point(p, c);
+	_t_str_c4_hal_graphics_circle circle;
+	circle.center.x = 100;
+	circle.center.y = 200;
+	circle.radius = 75;
+	circle.finess = 360;
+	draw_circle(circle, c);
 	glFlush(); /* Complete any pending operations */
 }
 

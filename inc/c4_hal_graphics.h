@@ -93,6 +93,7 @@ typedef struct _str_c4_hal_graphics_rectanble {
 typedef struct _str_c4_hal_graphics_circle {
 	_t_str_c4_hal_graphics_point center;
 	_t_ma_float radius;
+	_t_ma_float finess;
 } _t_str_c4_hal_graphics_circle;
 
 typedef enum _enu_obj{
