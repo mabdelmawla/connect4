@@ -63,36 +63,5 @@ _t_c4_err c4_game_draw_init(_t_c4_hal_graphics_key_callback cb, _t_c4_hal_graphi
 	c4_hal_graphics_draw_objects(3,objs);
 
 	c4_hal_graphics_init(&gstr_main_win_cfg, cb, sp_cb);
-#if 0
-	_t_str_c4_hal_graphics_line l;
-	l.start.x = 100;
-	l.start.y = 200;
-	l.end.x = 200;
-	l.end.y = 200;
-	l.thickness = 10;
-	_t_str_c4_hal_graphics_rectanble r;
-	r.bottom_left.x = 0;
-	r.bottom_left.y = 0;
-	r.top_right.x = 200;
-	r.top_right.y = 200;
-	_t_str_c4_hal_graphics_color c = {0};
-	c.r = 255;
-	draw_line(l, c);
-	c.g = 255;
-	draw_rectangle(r, c);
-	_t_str_c4_hal_graphics_point p;
-	p.x = 120;
-	p.y = 120;
-	c.r = 0;
-	c.g = 0;
-	c.b = 255;
-	draw_point(p, c);
-	_t_str_c4_hal_graphics_circle circle;
-	circle.center.x = 100;
-	circle.center.y = 200;
-	circle.radius = 75;
-	circle.finess = 360;
-	draw_circle(circle, c);
-#endif
 	return ret;
 }
