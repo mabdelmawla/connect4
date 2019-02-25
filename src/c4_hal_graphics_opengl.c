@@ -18,16 +18,27 @@ int xx, yy, cc;
 /** internal functionality **/
 
 /** draw line **/
-static void draw_line(_t_str_c4_hal_graphics_line line, _t_str_c4_hal_graphics_color c){
+static void draw_line(_t_str_c4_hal_graphics_line l, _t_str_c4_hal_graphics_color c){
     glColor3f(c.r,c.g,c.b);
 
-    glPointSize(line.thickness); // TODO: fine a solution for this point to work
+    glPointSize(l.thickness); // TODO: fine a solution for this point to work
 
     glEnd();
 	glBegin(GL_LINES); /* draw filled triangle */
-	glVertex2i(line.start.x, line.start.y);
-	glVertex2i(line.end.x, line.end.y);
+	glVertex2i(l.start.x, l.start.y);
+	glVertex2i(l.end.x, l.end.y);
 	glEnd(); /* OpenGL draws the filled triangle */
+}
+
+static void draw_rectangle(_t_str_c4_hal_graphics_rectanble r, _t_str_c4_hal_graphics_color c){
+    glColor3f(c.r,c.g,c.b);
+
+	glBegin(GL_POLYGON); /* draw filled triangle */
+	glVertex2i(r.bottom_left.x, r.bottom_left.y);
+	glVertex2i(r.top_right.x, r.bottom_left.y);
+	glVertex2i(r.top_right.x, r.top_right.y);
+	glVertex2i(r.bottom_left.x, r.top_right.y);
+	glEnd();
 }
 
 static void displayCB(void) {
@@ -44,9 +55,16 @@ static void displayCB(void) {
 	l.end.x = 200;
 	l.end.y = 200;
 	l.thickness = 10;
+	_t_str_c4_hal_graphics_rectanble r;
+	r.bottom_left.x = 0;
+	r.bottom_left.y = 0;
+	r.top_right.x = 200;
+	r.top_right.y = 200;
 	_t_str_c4_hal_graphics_color c = {0};
 	c.r = 255;
 	draw_line(l, c);
+	c.g = 255;
+	draw_rectangle(r, c);
 	glFlush(); /* Complete any pending operations */
 }
 

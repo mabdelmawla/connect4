@@ -85,8 +85,8 @@ typedef struct _str_c4_hal_graphics_line {
 } _t_str_c4_hal_graphics_line;
 
 typedef struct _str_c4_hal_graphics_rectanble {
-	_t_str_c4_hal_graphics_point top_left;
-	_t_str_c4_hal_graphics_point bottom_right;
+	_t_str_c4_hal_graphics_point bottom_left;
+	_t_str_c4_hal_graphics_point top_right;
 } _t_str_c4_hal_graphics_rectanble;
 
 typedef struct _str_c4_hal_graphics_circle {
