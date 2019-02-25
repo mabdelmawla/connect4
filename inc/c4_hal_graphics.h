@@ -67,21 +67,22 @@
 #endif
 
 typedef struct _str_c4_hal_graphics_color{
-	_t_ma_u8	r;
-	_t_ma_u8	g;
-	_t_ma_u8	b;
-	_t_ma_u8	alfa;
+	_t_ma_float	r;
+	_t_ma_float	g;
+	_t_ma_float	b;
+	_t_ma_float	alfa;	// TODO: figure out how to get alfa component working
 } _t_str_c4_hal_graphics_color;
 
 typedef struct _str_c4_hal_graphics_point{
 	_t_ma_float	x;
 	_t_ma_float	y;
+	_t_ma_float thickness;
 } _t_str_c4_hal_graphics_point;
 
 typedef struct _str_c4_hal_graphics_line {
 	_t_str_c4_hal_graphics_point start;
 	_t_str_c4_hal_graphics_point end;
-	_t_ma_float	thickness;
+	_t_ma_float	thickness; // this overrides whatever value provided by point
 } _t_str_c4_hal_graphics_line;
 
 typedef struct _str_c4_hal_graphics_rectanble {

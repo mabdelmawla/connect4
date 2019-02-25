@@ -16,17 +16,24 @@ static _t_c4_hal_graphics_special_key_callback gpf_sp_key_cb;
 int xx, yy, cc;
 
 /** internal functionality **/
+static void draw_point(_t_str_c4_hal_graphics_point p, _t_str_c4_hal_graphics_color c){
+    glColor3f(c.r,c.g,c.b);
+    glPointSize(3.0f);
+    glBegin(GL_POINTS);
+        glVertex2i(p.x, p.y);
+    glEnd();
 
-/** draw line **/
+
+}
+
 static void draw_line(_t_str_c4_hal_graphics_line l, _t_str_c4_hal_graphics_color c){
     glColor3f(c.r,c.g,c.b);
 
-    glPointSize(l.thickness); // TODO: fine a solution for this point to work
+	//glPointSize(l.thickness); // TODO: fine a solution for this point to work;
 
-    glEnd();
 	glBegin(GL_LINES); /* draw filled triangle */
-	glVertex2i(l.start.x, l.start.y);
-	glVertex2i(l.end.x, l.end.y);
+		glVertex2i(l.start.x, l.start.y);
+		glVertex2i(l.end.x, l.end.y);
 	glEnd(); /* OpenGL draws the filled triangle */
 }
 
@@ -34,10 +41,10 @@ static void draw_rectangle(_t_str_c4_hal_graphics_rectanble r, _t_str_c4_hal_gra
     glColor3f(c.r,c.g,c.b);
 
 	glBegin(GL_POLYGON); /* draw filled triangle */
-	glVertex2i(r.bottom_left.x, r.bottom_left.y);
-	glVertex2i(r.top_right.x, r.bottom_left.y);
-	glVertex2i(r.top_right.x, r.top_right.y);
-	glVertex2i(r.bottom_left.x, r.top_right.y);
+		glVertex2i(r.bottom_left.x, r.bottom_left.y);
+		glVertex2i(r.top_right.x, r.bottom_left.y);
+		glVertex2i(r.top_right.x, r.top_right.y);
+		glVertex2i(r.bottom_left.x, r.top_right.y);
 	glEnd();
 }
 
@@ -65,6 +72,13 @@ static void displayCB(void) {
 	draw_line(l, c);
 	c.g = 255;
 	draw_rectangle(r, c);
+	_t_str_c4_hal_graphics_point p;
+	p.x = 120;
+	p.y = 120;
+	c.r = 0;
+	c.g = 0;
+	c.b = 255;
+	draw_point(p, c);
 	glFlush(); /* Complete any pending operations */
 }
 
