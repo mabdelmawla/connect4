@@ -24,6 +24,7 @@ along with ma_clib.  If not, see <https://www.gnu.org/licenses/>.
 typedef char				_t_ma_char;
 typedef unsigned char		_t_ma_u8;
 typedef unsigned short		_t_ma_u16;
+typedef float				_t_ma_float;
 #ifndef __linux__
 	typedef unsigned long		_t_ma_u32;
 #else

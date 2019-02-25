@@ -74,13 +74,14 @@ typedef struct _str_c4_hal_graphics_color{
 } _t_str_c4_hal_graphics_color;
 
 typedef struct _str_c4_hal_graphics_point{
-	_t_ma_u16	x;
-	_t_ma_u16	y;
+	_t_ma_float	x;
+	_t_ma_float	y;
 } _t_str_c4_hal_graphics_point;
 
 typedef struct _str_c4_hal_graphics_line {
 	_t_str_c4_hal_graphics_point start;
 	_t_str_c4_hal_graphics_point end;
+	_t_ma_float	thickness;
 } _t_str_c4_hal_graphics_line;
 
 typedef struct _str_c4_hal_graphics_rectanble {
@@ -90,7 +91,7 @@ typedef struct _str_c4_hal_graphics_rectanble {
 
 typedef struct _str_c4_hal_graphics_circle {
 	_t_str_c4_hal_graphics_point center;
-	_t_ma_u16 radius;
+	_t_ma_float radius;
 } _t_str_c4_hal_graphics_circle;
 
 typedef enum _enu_obj{

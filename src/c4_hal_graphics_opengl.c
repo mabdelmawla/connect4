@@ -9,10 +9,26 @@
 
 #include <c4_hal_graphics.h>
 
+/** static declarations **/
 static _t_c4_hal_graphics_key_callback gpf_key_cb;
 static _t_c4_hal_graphics_special_key_callback gpf_sp_key_cb;
 
 int xx, yy, cc;
+
+/** internal functionality **/
+
+/** draw line **/
+static void draw_line(_t_str_c4_hal_graphics_line line, _t_str_c4_hal_graphics_color c){
+    glColor3f(c.r,c.g,c.b);
+
+    glPointSize(line.thickness); // TODO: fine a solution for this point to work
+
+    glEnd();
+	glBegin(GL_LINES); /* draw filled triangle */
+	glVertex2i(line.start.x, line.start.y);
+	glVertex2i(line.end.x, line.end.y);
+	glEnd(); /* OpenGL draws the filled triangle */
+}
 
 static void displayCB(void) {
 	glClear(GL_COLOR_BUFFER_BIT); /* clear the display */
@@ -22,6 +38,15 @@ static void displayCB(void) {
 	glVertex2i(100, 375);
 	glVertex2i(300, 375);
 	glEnd(); /* OpenGL draws the filled triangle */
+	_t_str_c4_hal_graphics_line l;
+	l.start.x = 100;
+	l.start.y = 200;
+	l.end.x = 200;
+	l.end.y = 200;
+	l.thickness = 10;
+	_t_str_c4_hal_graphics_color c = {0};
+	c.r = 255;
+	draw_line(l, c);
 	glFlush(); /* Complete any pending operations */
 }
 
@@ -43,6 +68,11 @@ static void SpecialKeyCb(int key, int x, int y){
 	glutPostRedisplay();
 	gpf_sp_key_cb((_t_ma_int)key, pt);
 }
+
+
+/**
+ * APIs
+ */
 
 _t_c4_err c4_hal_graphics_init(
 		_t_str_c4_hal_graphics_window* pwin,
@@ -85,12 +115,12 @@ _t_c4_err c4_hal_graphics_deinit(void) {
 	return ret;
 }
 
-_t_c4_err c4_hal_graphics_ploygon(
-		_t_ma_u32	num_pts,
-		_t_str_c4_hal_graphics_point *pts_array,
-		_t_str_c4_hal_graphics_color Color
+_t_c4_err c4_hal_graphics_draw_objects(
+		_t_ma_u32	num_objects,
+		_t_str_c4_hal_object *objects_array
 		){
 	_t_c4_err ret = C4_ERR_OK;
 	return ret;
 }
+
 
