@@ -13,6 +13,7 @@
 static _t_ma_u8 g_coing_location = 0;
 static _t_ma_u8 g_curr_player = 0;
 
+
 static void keyCB(_t_ma_char key, _t_str_c4_hal_graphics_point pt){
 }
 

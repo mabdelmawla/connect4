@@ -78,6 +78,14 @@ void c4_game_draw_coin(_t_ma_u8 coin_location, _t_ma_u8 player) {
 	g_coin_pointer_array[curr_location].color = gstr_inp.player_color[player];
 }
 
+void c4_game_board_update(
+		_t_ma_u8 slot,
+		_t_ma_u8 height,
+		_t_ma_u8 player	// 0: player1, 1: player 2, 0xff: null color
+		){
+
+}
+
 _t_c4_err c4_game_draw_init(_t_str_c4_game_draw_init inp) {
 	_t_c4_err ret = C4_ERR_NOT_OK;
 	gstr_inp = inp;
