@@ -51,7 +51,7 @@ static void initialize_objects(void) {
 		g_coin_pointer_array[i].uni_obj.circle.finess = 120;
 		cnt++;
 	}
-	g_coin_pointer_array[0].color = gstr_inp.player_1_color;
+	g_coin_pointer_array[0].color = gstr_inp.player_color[0];
 
 	//draw circles array
 	for (int i = 0; i < 7; i++) {
@@ -68,6 +68,10 @@ static void initialize_objects(void) {
 		}
 	}
 	g_num_objs = cnt;
+}
+
+_t_c4_err c4_game_draw_coin(_t_ma_u8 coin_location, _t_ma_u8 player){
+	g_coin_pointer_array[coin_location%7].color = gstr_inp.player_color[player];
 }
 
 _t_c4_err c4_game_draw_init(_t_str_c4_game_draw_init inp) {

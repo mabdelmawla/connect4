@@ -22,8 +22,8 @@ int c4_game_play_init(void){
 	_t_str_c4_game_draw_init inp= {
 			.pf_kcb = keyCB,
 			.pf_skcb = SpkeyCB,
-			.player_1_color = {1,0,0,0},
-			.player_2_color = {1,1,0,0}
+			.player_color[0] = {1,0,0,0},
+			.player_color[1] = {1,1,0,0}
 	};
 	c4_game_draw_init(inp);
 	return ret;
