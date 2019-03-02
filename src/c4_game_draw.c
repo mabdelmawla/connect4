@@ -24,6 +24,7 @@ static _t_str_c4_hal_object objs[50] = { 0 };
 static _t_str_c4_hal_object *g_slot_array[7];
 static _t_str_c4_hal_object *g_coin_pointer_array;
 static _t_str_c4_game_draw_init gstr_inp;
+static _t_str_c4_hal_graphics_color str_null_color;
 static int g_num_objs = 0;
 
 static void initialize_objects(void) {
@@ -46,7 +47,7 @@ static void initialize_objects(void) {
 		g_coin_pointer_array[i].uni_obj.circle.center.x = C4_GAME_DRAW_UNIT
 				* (3 + 2 * i) / 2;
 		g_coin_pointer_array[i].uni_obj.circle.center.y =
-				C4_GAME_DRAW_WINDOW_HIGHT - C4_GAME_DRAW_UNIT / 2;
+		C4_GAME_DRAW_WINDOW_HIGHT - C4_GAME_DRAW_UNIT / 2;
 		g_coin_pointer_array[i].uni_obj.circle.radius = C4_CIRCLE_R;
 		g_coin_pointer_array[i].uni_obj.circle.finess = 120;
 		cnt++;
@@ -70,8 +71,11 @@ static void initialize_objects(void) {
 	g_num_objs = cnt;
 }
 
-_t_c4_err c4_game_draw_coin(_t_ma_u8 coin_location, _t_ma_u8 player){
-	g_coin_pointer_array[coin_location%7].color = gstr_inp.player_color[player];
+void c4_game_draw_coin(_t_ma_u8 coin_location, _t_ma_u8 player) {
+	static _t_ma_u8 curr_location = 0;
+	g_coin_pointer_array[curr_location].color = str_null_color;
+	curr_location = coin_location % 7;
+	g_coin_pointer_array[curr_location].color = gstr_inp.player_color[player];
 }
 
 _t_c4_err c4_game_draw_init(_t_str_c4_game_draw_init inp) {

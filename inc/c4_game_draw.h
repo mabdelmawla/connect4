@@ -17,6 +17,6 @@ typedef struct _str_c4_game_draw_init {
 } _t_str_c4_game_draw_init;
 
 _t_c4_err c4_game_draw_init(_t_str_c4_game_draw_init);
-_t_c4_err c4_game_draw_coin(_t_ma_u8, _t_ma_u8);
+void c4_game_draw_coin(_t_ma_u8, _t_ma_u8);
 
 #endif /* INC_C4_GAME_DRAW_H_ */
