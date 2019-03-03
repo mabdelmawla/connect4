@@ -24,7 +24,7 @@ static _t_str_c4_hal_object objs[50] = { 0 };
 static _t_str_c4_hal_object *g_slot_array[7];
 static _t_str_c4_hal_object *g_coin_pointer_array;
 static _t_str_c4_game_draw_init gstr_inp;
-static _t_str_c4_hal_graphics_color str_null_color;
+static _t_str_c4_hal_graphics_color str_null_color = {0};
 static int g_num_objs = 0;
 
 static void initialize_objects(void) {
@@ -83,7 +83,11 @@ void c4_game_board_update(
 		_t_ma_u8 height,
 		_t_ma_u8 player	// 0: player1, 1: player 2, 0xff: null color
 		){
-
+	if(0xff == player){
+		g_slot_array[slot][height].color = str_null_color;
+	} else {
+		g_slot_array[slot][height].color = gstr_inp.player_color[player%2];
+	}
 }
 
 _t_c4_err c4_game_draw_init(_t_str_c4_game_draw_init inp) {

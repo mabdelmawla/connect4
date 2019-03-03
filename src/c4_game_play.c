@@ -12,9 +12,17 @@
 
 static _t_ma_u8 g_coing_location = 0;
 static _t_ma_u8 g_curr_player = 0;
-
+static _t_ma_u8 g_board[7][6] = {0xff};
+static _t_ma_u8 g_slots[7] = {0};
 
 static void keyCB(_t_ma_char key, _t_str_c4_hal_graphics_point pt){
+	if(('\r' == key) && (g_slots[g_coing_location] < 6)){
+		c4_game_board_update(g_coing_location, g_slots[g_coing_location], g_curr_player);
+		g_board[g_coing_location][g_slots[g_coing_location]] = g_curr_player;
+		g_curr_player = 1 - g_curr_player;
+		c4_game_draw_coin(g_coing_location, g_curr_player);
+		g_slots[g_coing_location]++;
+	}
 }
 
 static void SpkeyCB(_t_ma_int key, _t_str_c4_hal_graphics_point pt){
