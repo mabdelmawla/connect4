@@ -20,7 +20,7 @@ static _t_str_c4_hal_graphics_window gstr_main_win_cfg = { .height =
 C4_GAME_DRAW_WINDOW_HIGHT, .width = C4_GAME_DRAW_WINDOW_WIDTH, .bg_color = { 0,
 		0, 0, 0 }, .pt_window_start = { 0, 0 }, .win_name = "Connect 4" };
 
-static _t_str_c4_hal_object objs[50] = { 0 };
+static _t_str_c4_hal_object objs[51] = { 0 };
 static _t_str_c4_hal_object *g_slot_array[7];
 static _t_str_c4_hal_object *g_coin_pointer_array;
 static _t_str_c4_game_draw_init gstr_inp;
@@ -49,7 +49,7 @@ static void initialize_objects(void) {
 		g_coin_pointer_array[i].uni_obj.circle.center.y =
 		C4_GAME_DRAW_WINDOW_HIGHT - C4_GAME_DRAW_UNIT / 2;
 		g_coin_pointer_array[i].uni_obj.circle.radius = C4_CIRCLE_R;
-		g_coin_pointer_array[i].uni_obj.circle.finess = 120;
+		g_coin_pointer_array[i].uni_obj.circle.finess = 360;
 		cnt++;
 	}
 	g_coin_pointer_array[0].color = gstr_inp.player_color[0];
@@ -64,10 +64,18 @@ static void initialize_objects(void) {
 			g_slot_array[i][j].uni_obj.circle.center.y = C4_GAME_DRAW_UNIT
 					* (3 + 2 * j) / 2;
 			g_slot_array[i][j].uni_obj.circle.radius = C4_CIRCLE_R;
-			g_slot_array[i][j].uni_obj.circle.finess = 120;
+			g_slot_array[i][j].uni_obj.circle.finess = 360;
 			cnt++;
 		}
 	}
+
+	//draw winner circle
+	objs[cnt].type = C4_HAL_GRAPHICS_CIRCLE;
+	objs[cnt].uni_obj.circle.center.x = C4_GAME_DRAW_WINDOW_WIDTH / 2;
+	objs[cnt].uni_obj.circle.center.y = C4_GAME_DRAW_UNIT / 2;
+	objs[cnt].uni_obj.circle.radius = C4_CIRCLE_R;
+	objs[cnt].uni_obj.circle.finess = 360;
+	cnt++;
 	g_num_objs = cnt;
 }
 
@@ -98,3 +106,5 @@ _t_c4_err c4_game_draw_init(_t_str_c4_game_draw_init inp) {
 	c4_hal_graphics_init(&gstr_main_win_cfg, inp.pf_kcb, inp.pf_skcb);
 	return ret;
 }
+
+

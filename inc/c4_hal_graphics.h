@@ -96,12 +96,18 @@ typedef struct _str_c4_hal_graphics_circle {
 	_t_ma_float finess;
 } _t_str_c4_hal_graphics_circle;
 
+typedef struct _str_c4_hal_graphics_string {
+	_t_str_c4_hal_graphics_point pt;
+	_t_ma_char *s;
+}_t_str_c4_hal_graphics_string;
+
 typedef enum _enu_obj{
 	C4_HAL_GRAPHICS_NONE = 0xC500,
 	C4_HAL_GRAPHICS_PT,
 	C4_HAL_GRAPHICS_LINE,
 	C4_HAL_GRAPHICS_RECTANGLE,
-	C4_HAL_GRAPHICS_CIRCLE
+	C4_HAL_GRAPHICS_CIRCLE,
+	C4_HAL_GRAPHICS_STRING
 } _t_enu_obj;
 
 typedef struct _str_c4_hal_object {
@@ -111,6 +117,7 @@ typedef struct _str_c4_hal_object {
 		_t_str_c4_hal_graphics_line			line;
 		_t_str_c4_hal_graphics_rectanble 	rectangle;
 		_t_str_c4_hal_graphics_circle 		circle;
+		_t_str_c4_hal_graphics_string		string;
 	} uni_obj;
 	_t_str_c4_hal_graphics_color color;
 } _t_str_c4_hal_object;
@@ -138,4 +145,5 @@ _t_c4_err c4_hal_graphics_draw_objects(
 		_t_ma_u32	num_objects,
 		_t_str_c4_hal_object *objects_array
 		);
+
 #endif /* INC_C4_HAL_GRAPHICS_H_ */
