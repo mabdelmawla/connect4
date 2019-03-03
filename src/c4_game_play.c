@@ -16,13 +16,13 @@ static _t_ma_u8 g_board[7][6];
 static _t_ma_u8 g_slots[7];
 static _t_ma_u8 g_declare_win;
 
-static void check_win(void) {
+static void check_win(void) {	// TODO: Improve this implementation
 	_t_ma_u8 loc = g_curr_coin_location;
 	_t_ma_u8 player = g_curr_player;
 	int cnt;
 	int h = g_slots[loc];
 	int win = 1;
-	//vertical check;
+	//############# vertical check;
 	cnt = h;
 	while(cnt > 0){
 		if(g_board[loc][--cnt] == player){
@@ -38,7 +38,7 @@ static void check_win(void) {
 		return;
 	}
 
-	//horizontal check
+	//############# horizontal check
 	win = 1;
 	cnt = loc;
 	//right side check
@@ -65,32 +65,65 @@ static void check_win(void) {
 		return;
 	}
 
-
-	//horizontal check
-#if 0
+	//######### diagonal check
+	int hh;
+	// ### left inclining slope
 	win = 1;
+	hh = h;
 	cnt = loc;
-	do {
-		if (g_board[cnt--][h] == player) {
+	//right side check
+	while((cnt > 0) && (hh > 0)){
+		if(g_board[--cnt][--hh] == player){
 			win++;
 		} else {
 			break;
 		}
-	} while (cnt > 0);
+	}
 	cnt = loc;
-	do {
-		if (g_board[cnt++][h] == player) {
+	hh = h;
+	//left side check
+	while((cnt < 6) && (hh < 5)){
+		if(g_board[++cnt][+hh] == player){
 			win++;
 		} else {
 			break;
 		}
-	} while (cnt < 7);
+	}
+
 	if (win == 4) { // declare win
 		g_declare_win = 1;
 		c4_set_winning_coin(player);
 		return;
 	}
-#endif
+	// ### left inclining slope
+	win = 1;
+	hh = h;
+	cnt = loc;
+	//right side check
+	while((cnt > 0) && (hh < 0)){
+		if(g_board[--cnt][++hh] == player){
+			win++;
+		} else {
+			break;
+		}
+	}
+	cnt = loc;
+	hh = h;
+	//left side check
+	while((cnt < 6) && (hh > 0)){
+		if(g_board[++cnt][--hh] == player){
+			win++;
+		} else {
+			break;
+		}
+	}
+
+	if (win == 4) { // declare win
+		g_declare_win = 1;
+		c4_set_winning_coin(player);
+		return;
+	}
+
 }
 static void clear_all(_t_ma_bool update_draw) {
 	//g_curr_coin_location = 0;
