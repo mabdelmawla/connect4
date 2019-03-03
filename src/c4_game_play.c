@@ -100,7 +100,7 @@ static void check_win(void) {	// TODO: Improve this implementation
 	hh = h;
 	cnt = loc;
 	//right side check
-	while((cnt > 0) && (hh < 0)){
+	while((cnt > 0) && (hh < 5)){
 		if(g_board[--cnt][++hh] == player){
 			win++;
 		} else {
