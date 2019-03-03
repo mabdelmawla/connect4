@@ -101,7 +101,11 @@ void c4_game_board_update(
 }
 
 void c4_set_winning_coin(_t_ma_u8 player){
-	g_winning_coin->color = gstr_inp.player_color[player%2];
+	if(0xff != player){
+		g_winning_coin->color = gstr_inp.player_color[player%2];
+	} else {
+		g_winning_coin->color = str_null_color;
+	}
 }
 
 _t_c4_err c4_game_draw_init(_t_str_c4_game_draw_init inp) {

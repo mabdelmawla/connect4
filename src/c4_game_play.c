@@ -20,25 +20,55 @@ static void check_win(void) {
 	_t_ma_u8 loc = g_curr_coin_location;
 	_t_ma_u8 player = 1 - g_curr_player;
 	int cnt;
+	int h = g_slots[loc]-1;
 	int win = 1;
 	//vertical check;
-	cnt = g_slots[loc] - 1;
-	if (cnt > 2) {
-		do {
-			if (g_board[loc][cnt--] == player) {
-				win++;
-			} else {
-				break;
-			}
-		} while (cnt > 0);
+	cnt = h;
+	while(cnt > 0){
+		if(g_board[loc][--cnt] == player){
+			win++;
+		} else {
+			break;
+		}
 	}
+
 	if (win == 4) { // declare win
 		g_declare_win = 1;
 		c4_set_winning_coin(player);
+		return;
 	}
-}
 
+	//horizontal check
+#if 0
+	win = 1;
+	cnt = loc;
+	do {
+		if (g_board[cnt--][h] == player) {
+			win++;
+		} else {
+			break;
+		}
+	} while (cnt > 0);
+	cnt = loc;
+	do {
+		if (g_board[cnt++][h] == player) {
+			win++;
+		} else {
+			break;
+		}
+	} while (cnt < 7);
+	if (win == 4) { // declare win
+		g_declare_win = 1;
+		c4_set_winning_coin(player);
+		return;
+	}
+#endif
+}
 static void clear_all(void) {
+	//g_curr_coin_location = 0;
+	//g_curr_player = 0;
+	g_declare_win = 0;
+
 	for (int i = 0; i < 7; i++) {
 		g_slots[i] = 0;
 		for (int j = 0; j < 6; j++) {
@@ -46,11 +76,11 @@ static void clear_all(void) {
 			c4_game_board_update(i, j, 0xff);
 		}
 	}
+	c4_set_winning_coin(0xff);
 }
 
 static void keyCB(_t_ma_char key, _t_str_c4_hal_graphics_point pt) {
 	if (1 == g_declare_win) {
-		g_declare_win = 0;
 		clear_all();
 	} else {
 		if (('\r' == key) && (g_slots[g_curr_coin_location] < 6)) {
