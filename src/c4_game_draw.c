@@ -33,6 +33,8 @@ static void initialize_objects(void) {
 	//draw the game frame
 	objs[cnt].type = C4_HAL_GRAPHICS_RECTANGLE;
 	objs[cnt].color.b = 1;
+	objs[cnt].color.r = 0.5;
+	objs[cnt].color.g = 0.5;
 	objs[cnt].uni_obj.rectangle.bottom_left.x = C4_GAME_DRAW_UNIT;
 	objs[cnt].uni_obj.rectangle.bottom_left.y = C4_GAME_DRAW_UNIT;
 	objs[cnt].uni_obj.rectangle.top_right.x = C4_GAME_DRAW_WINDOW_WIDTH

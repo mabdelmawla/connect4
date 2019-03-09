@@ -183,8 +183,8 @@ int c4_game_play_init(void) {
 	g_curr_player = 0;
 	clear_all(0);
 	_t_str_c4_game_draw_init inp =
-			{ .pf_kcb = keyCB, .pf_skcb = SpkeyCB, .player_color[0] = { 1, 0, 0,
-					0 }, .player_color[1] = { 1, 1, 0, 0 } };
+			{ .pf_kcb = keyCB, .pf_skcb = SpkeyCB, .player_color[0] = { 0.8, 0.2, 0.0,
+					0 }, .player_color[1] = { 1, 0.7, 0, 0 } };
 	c4_game_draw_init(inp);
 	return ret;
 }
