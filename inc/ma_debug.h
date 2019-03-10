@@ -11,11 +11,11 @@
 
 #ifdef MA_DEBUG
 #include <stdio.h>
-static FILE *ma_dbg_fp;
+extern FILE *ma_dbg_fp;
 #define MA_DBG_START() \
 	do { \
 		char name[64] = {0}; \
-		sprintf(name, "%s_%s.txt", __DATE__, __TIME__); \
+		sprintf(name, "log/%s_%s.txt", __DATE__, __TIME__); \
 		ma_dbg_fp = fopen(name, "w"); \
 	} while(0)
 #define MA_DBG_FPRINT(...) fprintf(ma_dbg_fp,__VA_ARGS__)
@@ -23,7 +23,8 @@ static FILE *ma_dbg_fp;
 #define MA_DBG_END() fclose(ma_dbg_fp)
 #else
 #define MA_DBG_START()
-#define MA_DBG_PRING(s)
+#define MA_DBG_FPRINT(...)
+#define MA_DBG_PRINT(...)
 #define MA_DBG_END()
 #endif
 

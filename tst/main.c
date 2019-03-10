@@ -3,6 +3,7 @@
 #include <ma_debug.h>
 #include <stdio.h>
 
+FILE *ma_dbg_fp;
 
 int main(int argc, char**argv) {
 	MA_DBG_START();
