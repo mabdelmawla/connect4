@@ -17,6 +17,17 @@ static _t_ma_u8 g_board[7][6];
 static _t_ma_u8 g_slots[7];
 static _t_ma_u8 g_declare_win;
 
+static void log_special_debug(void){
+	MA_DBG_FPRINT("\n############# Start Special Debug Log #############\n\n");
+	for(int i = 5; i >= 0; i--){
+		for(int j = 0; j < 7; j++){
+			MA_DBG_FPRINT("%d\t,", g_board[j][i]);
+		}
+		MA_DBG_FPRINT("\n");
+	}
+	MA_DBG_FPRINT("\n############# End Special Debug Log #############\n\n");
+}
+
 static void check_win(void) {	// TODO: Improve this implementation
 	_t_ma_u8 loc = g_curr_coin_location;
 	_t_ma_u8 player = g_curr_player;
@@ -149,16 +160,13 @@ static void clear_all(_t_ma_bool update_draw) {
 
 static void keyCB(_t_ma_char key, _t_str_c4_hal_graphics_point pt) {
 	if ((1 == g_declare_win) || ('n' == key) || ('N' == key)) {
+		if(1 == g_declare_win){
+			MA_DBG_FPRINT("======> Winning player %d\n", 1-g_curr_player);
+			log_special_debug();
+		}
 		clear_all(1);
 	} else if('d' == key) { // special debug log
-		MA_DBG_FPRINT("\n############# Start Special Debug Log #############\n\n");
-		for(int i = 5; i >= 0; i--){
-			for(int j = 0; j < 7; j++){
-				MA_DBG_FPRINT("%d\t,", g_board[j][i]);
-			}
-			MA_DBG_FPRINT("\n");
-		}
-		MA_DBG_FPRINT("\n############# End Special Debug Log #############\n\n");
+		log_special_debug();
 	} else {
 		if (('\r' == key) && (g_slots[g_curr_coin_location] < 6)) {
 			c4_game_board_update(g_curr_coin_location,
@@ -166,7 +174,7 @@ static void keyCB(_t_ma_char key, _t_str_c4_hal_graphics_point pt) {
 			g_board[g_curr_coin_location][g_slots[g_curr_coin_location]] =
 					g_curr_player;
 			// log the current play
-			MA_DBG_FPRINT("%d,%d\n", g_curr_player, g_curr_coin_location);
+			MA_DBG_FPRINT("[p] %d,%d\n", g_curr_player, g_curr_coin_location);
 			check_win();
 			g_curr_player = 1 - g_curr_player;
 			c4_game_draw_coin(g_curr_coin_location, g_curr_player);
