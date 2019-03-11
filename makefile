@@ -11,7 +11,7 @@ CC=gcc
 #CFLAGS
 ifeq ($(GRAPHICS_LIB),GL_GLUT)
 	#CFLAGS=-Iinc -I. -g -lglut -lGLU -lGL -lXmu -lXi -lXext -lX11 -lm
-	CFLAGS=-Iinc -I. -g -lm -lglut -lGL -lGLU -D$(GRAPHICS_LIB) -DMA_DEBUG
+	CFLAGS=-Iinc -I. -g -lm -lglut -lGL -lGLU -D$(GRAPHICS_LIB) -DMA_DEBUG -Wall -Wextra
 else
 	CFLAGS=-Iinc -I. -g
 endif

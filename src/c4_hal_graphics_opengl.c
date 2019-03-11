@@ -95,7 +95,7 @@ static void c4_hal_graphics_write_string(_t_str_c4_hal_graphics_string s,
 
 static void displayCB(void) {
 	glClear(GL_COLOR_BUFFER_BIT); /* clear the display */
-	for (int i = 0; i < gu32_num_objs; i++) {
+	for (unsigned int i = 0; i < gu32_num_objs; i++) {
 		switch (gp_obj_array[i].type) {
 		case C4_HAL_GRAPHICS_PT:
 			draw_point(gp_obj_array[i].uni_obj.pt, gp_obj_array[i].color);
@@ -122,13 +122,13 @@ static void displayCB(void) {
 
 static void keyCB(unsigned char key, int x, int y) /* called on key press */
 {
-	_t_str_c4_hal_graphics_point pt = { x, y };
+	_t_str_c4_hal_graphics_point pt = { x, y , 1};
 	glutPostRedisplay();
 	gpf_key_cb((_t_ma_char) key, pt);
 }
 
 static void SpecialKeyCb(int key, int x, int y) {
-	_t_str_c4_hal_graphics_point pt = { x, y };
+	_t_str_c4_hal_graphics_point pt = { x, y, 1 };
 	glutPostRedisplay();
 	gpf_sp_key_cb((_t_ma_int) key, pt);
 }

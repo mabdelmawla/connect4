@@ -5,7 +5,7 @@
 
 FILE *ma_dbg_fp;
 
-int main(int argc, char**argv) {
+int main(void) {
 	MA_DBG_START();
 	c4_game_play_init();
 	MA_DBG_END();
