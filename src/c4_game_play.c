@@ -95,7 +95,7 @@ static void check_win(void) {	// TODO: Improve this implementation
 	hh = h;
 	//left side check
 	while((cnt < 6) && (hh < 5)){
-		if(g_board[++cnt][+hh] == player){
+		if(g_board[++cnt][++hh] == player){
 			win++;
 		} else {
 			break;
